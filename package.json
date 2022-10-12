@@ -1,0 +1,14 @@
+{
+  "name": "node-study",
+  "version": "1.0.0",
+  "description": "class101 MySQL, Node.js 백엔드 속성 실무!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hojun",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
