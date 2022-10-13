@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", function (req, res) {
-  res.render("index", { title: "EJS 메인 페이지" });
+  res.render("main", { title: "movie review site" });
+});
+
+router.post("/review/create", function (req, res) {
+  let movie_id = req.body.movie_id;
+  let review = req.body.review;
 });
 
 router.get("/about", function (req, res) {
