@@ -2,6 +2,28 @@ const express = require("express");
 const router = express.Router();
 const db = require("../model/db");
 
+// 크롤링
+const cheerio = require("cheerio");
+const axios = require("axios"); // 외부에서 가져올 때 사용.
+const iconv = require("iconv-lite"); // 가져올 때 한글 깨지는 것을 막기 위해 사용, arraybuffer로 가져와야함.
+const url = "https://finance.naver.com/world/market_news_main.naver";
+
+router.get("/crawling", function (req, res) {
+  axios({ url: url, method: "GET", responseType: "arraybuffer" }).then(
+    function (html) {
+      const content = iconv.decode(html.data, "EUC-KR").toString();
+      const $ = cheerio.load(content);
+
+      const table = $(".news_list a");
+      table.each(function (i, tag) {
+        console.log($(tag).text().trim());
+      });
+      res.send({ success: 200 });
+    }
+  );
+});
+// 크롤링
+
 router.get("/", function (req, res) {
   res.render("main", { title: "movie review site" });
 });
