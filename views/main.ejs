@@ -145,7 +145,7 @@
         target_movie = id;
         $(".modal-body").html("");
         $.ajax({
-          url: `http://universeapi.net/review/list?movie_id=${target_movie}`, // 클라이언트가 요청을 보낼 서버의 URL 주소
+          url: `/review/read?movie_id=${target_movie}`, // 클라이언트가 요청을 보낼 서버의 URL 주소
           data: {}, // HTTP 요청과 함께 서버로 보낼 데이터 POST 방식에서만 사용
           type: "GET", // HTTP 요청 방식(GET, POST)
           success: function (json) {
@@ -164,13 +164,20 @@
         let review = $("#review").val();
         let review_html = `<p>${review}</p>`;
         $.ajax({
-          url: `http://universeapi.net/review/add`, // 클라이언트가 요청을 보낼 서버의 URL 주소
+          url: `/review/create`, // 클라이언트가 요청을 보낼 서버의 URL 주소
           data: {
             movie_id: target_movie,
             review: review,
           }, // HTTP 요청과 함께 서버로 보낼 데이터 POST 방식에서만 사용
           type: "POST", // HTTP 요청 방식(GET, POST)
-          success: function (json) {},
+          success: function (json) {
+            console.log(json);
+            if (json.success == 200) {
+              console.log("save");
+            } else if (json.success == 400) {
+              alert("fail");
+            }
+          },
           error: function (e) {},
         });
         $(".modal-body").append(review_html);
