@@ -24,6 +24,17 @@ router.get("/crawling", function (req, res) {
 });
 // 크롤링
 
+// EXCEL
+router.get("/excel", function (req, res) {
+  res.render("excel");
+});
+
+router.get("/excel/down", function (req, res) {
+  let excel_data = [{ A: 1, B: 2, C: 3, D: 4 }];
+  res.xls("data.xlsx", excel_data);
+});
+// EXCEL
+
 router.get("/", function (req, res) {
   res.render("main", { title: "movie review site" });
 });

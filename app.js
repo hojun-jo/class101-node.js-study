@@ -3,16 +3,16 @@ const helmet = require("helmet");
 const app = express();
 const ejs = require("ejs");
 const db = require("./model/db");
+const json2xls = require("json2xls");
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
 app.use("/public", express.static(__dirname + "/public"));
 
 // app.use(helmet());
-// post body에서 받기 위해 필요
 app.use(express.json());
 app.use(express.urlencoded());
-// post body에서 받기 위해 필요
+app.use(json2xls.middleware);
 
 const mainRouter = require("./router/mainRouter");
 app.use("/", mainRouter);
